@@ -34,3 +34,5 @@ while 1:
                 sys.exit()
             elif i.key == pg.K_LEFT:
                 motion = LEFT
+            elif i.key == pg.RIGHT:
+                motion = RIGHT
