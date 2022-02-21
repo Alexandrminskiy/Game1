@@ -72,8 +72,12 @@ while 1:
     all_sprites.draw(sc)
     # pg.draw.rect(sc, BROWN, (x,y,50,50))
     pg.display.update()
-    # if motion == LEFT: x -= 5
-    # elif motion == RIGHT: x += 5
-    # elif motion == UP: y -= 5
-    # elif motion == DOWN: y += 5
+    # if motion == LEFT:
+    #     x -= 5
+    # elif motion == RIGHT:
+    #     x += 5
+    # elif motion == UP:
+    #     y -= 5
+    # elif motion == DOWN:
+    #     y += 5
     clock.tick(FPS)
