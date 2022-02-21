@@ -20,10 +20,11 @@ clock = pg.time.Clock()
 sc = pg.display.set_mode((WIN_WIDTH,WIN_HEIGHT))
 sc.fill(GREEN)
 
-pg.draw.rect(sc, BROWN, (250,300,50,50))
+x = 250
+y = 300
 
 pg.display.update()
-
+motion = STOP
 while 1:
     clock.tick(FPS)
     for i in pg.event.get():
@@ -34,5 +35,24 @@ while 1:
                 sys.exit()
             elif i.key == pg.K_LEFT:
                 motion = LEFT
-            elif i.key == pg.RIGHT:
+            elif i.key == pg.K_RIGHT:
                 motion = RIGHT
+            elif i.key == pg.K_UP:
+                motion = UP
+            elif i.key == pg.K_DOWN:
+                motion = DOWN
+        elif i.type == pg.KEYUP:
+            if i.key in [pg.K_RIGHT, pg.K_LEFT, pg.K_UP, pg.K_DOWN]:
+                motion = STOP
+    sc.fill(GREEN)
+    pg.draw.rect(sc, BROWN, (x,y,50,50))
+    pg.display.update()
+    if motion == LEFT:
+        x -= 5
+    elif motion == RIGHT:
+        x += 5
+    elif motion == UP:
+        y -= 5
+    elif motion == DOWN:
+        y += 5
+    clock.tick(FPS)
