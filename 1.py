@@ -37,17 +37,22 @@ class Player(pg.sprite.Sprite):
     def update(self):
         if motion == LEFT:
             self.rect.x -= 5
+            # player.image = pg.transform.flip(player.image, 1, 0)
+
         elif motion == RIGHT:
             self.rect.x += 5
+
         elif motion == UP:
             self.rect.y -= 5
         elif motion == DOWN:
             self.rect.y += 5
 
+
 all_sprites = pg.sprite.Group()
 player = Player()
 all_sprites.add(player)
 # pg.display.update()
+
 
 while 1:
     clock.tick(FPS)
@@ -59,15 +64,24 @@ while 1:
                 sys.exit()
             elif i.key == pg.K_LEFT:
                 motion = LEFT
+
+
+                # player.image = pg.transform.rotate(player.image, 180)
             elif i.key == pg.K_RIGHT:
                 motion = RIGHT
+
             elif i.key == pg.K_UP:
                 motion = UP
             elif i.key == pg.K_DOWN:
                 motion = DOWN
+
         elif i.type == pg.KEYUP:
             if i.key in [pg.K_RIGHT, pg.K_LEFT, pg.K_UP, pg.K_DOWN]:
                 motion = STOP
+        if pg.key.get_pressed()[pg.K_LEFT]:
+            player.image = pg.transform.flip(player.image, 1, 0)
+
+
     all_sprites.update()
     sc.fill(GREEN)
     all_sprites.draw(sc)
