@@ -7,6 +7,8 @@ game_folder = os.path.dirname(__file__)
 img_folder = os.path.join(game_folder, 'img')
 player_img = pg.image.load(os.path.join(img_folder, 'p1_jump.png'))
 
+# if pg.key.get_pressed()[pg.K_LEFT]:
+#     player.image = pg.transform.flip(player.image, 1, 0)
 # здесь определяются константы,
 FPS = 60
 WIN_WIDTH = 600
@@ -37,7 +39,6 @@ class Player(pg.sprite.Sprite):
     def update(self):
         if motion == LEFT:
             self.rect.x -= 5
-            # player.image = pg.transform.flip(player.image, 1, 0)
 
         elif motion == RIGHT:
             self.rect.x += 5
@@ -47,12 +48,20 @@ class Player(pg.sprite.Sprite):
         elif motion == DOWN:
             self.rect.y += 5
 
+    # def orent(self):
+    #     if self.orintation == "RIGHT":
+    #         self.sc.blit(self.image, self.rect)
+    #     elif self.orientation == "Left":
+    #         self.sc.blit(pg.transform.flip(self.image, 1, 0), self.rect)
+
 
 all_sprites = pg.sprite.Group()
 player = Player()
 all_sprites.add(player)
 # pg.display.update()
-
+# player.image = pg.transform.flip(player.image, 1, 0)
+Pl_l = pg.transform.flip(player.image, 1, 0)
+Pl_R = pg.transform.flip(player.image, 0, 0)
 
 while 1:
     clock.tick(FPS)
@@ -64,11 +73,11 @@ while 1:
                 sys.exit()
             elif i.key == pg.K_LEFT:
                 motion = LEFT
-
-
+                player.image = Pl_l
                 # player.image = pg.transform.rotate(player.image, 180)
             elif i.key == pg.K_RIGHT:
                 motion = RIGHT
+                player.image = Pl_R
 
             elif i.key == pg.K_UP:
                 motion = UP
@@ -78,8 +87,7 @@ while 1:
         elif i.type == pg.KEYUP:
             if i.key in [pg.K_RIGHT, pg.K_LEFT, pg.K_UP, pg.K_DOWN]:
                 motion = STOP
-        if pg.key.get_pressed()[pg.K_LEFT]:
-            player.image = pg.transform.flip(player.image, 1, 0)
+
 
 
     all_sprites.update()
