@@ -6,6 +6,7 @@ import os
 game_folder = os.path.dirname(__file__)
 img_folder = os.path.join(game_folder, 'img')
 player_img = pg.image.load(os.path.join(img_folder, 'p1_jump.png'))
+player_img = pg.transform.rotozoom(player_img, 0.7, 0.7) #уменьшение размера
 
 # здесь определяются константы,
 FPS = 60
@@ -37,21 +38,23 @@ class Player(pg.sprite.Sprite):
 
     def update(self):
         if motion == LEFT:
-            self.rect.x -= 5
+            self.rect.x -= 4
         elif motion == RIGHT:
-            self.rect.x += 5
+            self.rect.x += 4
         elif motion == UP:
-            self.rect.y -= 5
+            self.rect.y -= 4
         elif motion == DOWN:
-            self.rect.y += 5
+            self.rect.y += 4
 
 all_sprites = pg.sprite.Group()
 player = Player()
 all_sprites.add(player)
 # pg.display.update()
 # player.image = pg.transform.flip(player.image, 1, 0)
-Pl_l = pg.transform.flip(player.image, 1, 0)
-Pl_R = pg.transform.flip(player.image, 0, 0)
+
+
+Pl_l = pg.transform.flip(player.image, 1, 0) #Паварот персонажа
+Pl_R = pg.transform.flip(player.image, 0, 0) # влево или в право
 
 while 1:
     clock.tick(FPS)
